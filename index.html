@@ -27,12 +27,13 @@
         }
 
         function draw(){
-            canvasCtx.fillStyle = "#286047"
-            canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+            canvasCtx.fillStyle = "#286047" //Define qual vai ser o estilo para desenhar o próximo objeto: um retângulo que vai possuir essa cor em hexadecimal. A fillStyle é uma propriedade em que se atribui valor (nao uma função)
+            canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight) //posição 0,0: começa do ponto noroeste inicial da janela. Quero, também, como largura e altura, toda a extensão: pegar toda a extensão da janela, a própria largura e a própria altura (inner...)
+            //Usar propriedades de resetCSS para zerar margem e padding.
         }
 
         setup()
-        draw()
+        draw() //Chamar essa função para desenhar os elementos na tela
     </script>
 </body>
 </html>
