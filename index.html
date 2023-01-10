@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo PING-PONG</title>
+    <style>
+        * {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Jogo Ping-Pong</h1>
+    
     <canvas></canvas>
     
     <script>
@@ -16,14 +23,16 @@
 
         function setup(){
             canvasEl.width = canvasCtx.width = window.innerWidth
-            canvasEl.heigh = canvasCtx.height = window.innerHeight
+            canvasEl.height = canvasCtx.height = window.innerHeight
         }
 
         function draw(){
-
+            canvasCtx.fillStyle = "#286047"
+            canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
         }
 
         setup()
+        draw()
     </script>
 </body>
 </html>
