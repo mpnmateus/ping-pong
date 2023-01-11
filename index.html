@@ -54,6 +54,12 @@
             200
             )
 
+            // * DESENHA A BOLINHA:
+            canvasCtx.beginPath()
+            // Entre o beginPath e o fill, nesse intervalo, desenhamos o arco
+            canvasCtx.arc(200, 300, 20, 0, 2 * Math.PI, false)
+            canvasCtx.fill() //o comando arc não tem um fillArc, por ex. Por isso usamos esse comando. 
+
         }
 
         setup()
