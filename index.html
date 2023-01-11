@@ -47,7 +47,13 @@
             // * DESENHA A RAQUETE ESQUERDA:
             canvasCtx.fillRect(10, 200, lineWidth, 200)
 
-            
+            // * DESENHA A RAQUETE DIREITA:
+            canvasCtx.fillRect(window.innerWidth - lineWidth - 10,
+            300,
+            lineWidth,
+            200
+            )
+
         }
 
         setup()
