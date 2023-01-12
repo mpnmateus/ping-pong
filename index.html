@@ -38,9 +38,9 @@
             canvasCtx.fillStyle = "#ffffff" //a partir de agora, toda cor será branca
 
             const x = window.innerWidth / 2 - lineWidth / 2 //Queremos posicionar essa linha no meio. Portanto, pego a largura do campo e divido em dois; Se eu não descontar a linha, ela fica deslocada, vai ficar com o 0 (ponto de início) no canto superior direito (capricho necessário)
-            const y = 0
-            const L = lineWidth
-            const A = window.innerHeight      
+            const y = 0 //O ponto de início é o ponto 0
+            const L = lineWidth //A largura é a própria espessura da linha
+            const A = window.innerHeight //A altura é a própria altura do campo
             // * DESENHA A LINHA CENTRAL:
             canvasCtx.fillRect(x, y, L , A)
 
@@ -60,10 +60,23 @@
             canvasCtx.arc(200, 300, 20, 0, 2 * Math.PI, false)
             canvasCtx.fill() //o comando arc não tem um fillArc, por ex. Por isso usamos esse comando. 
 
+
+            // * DESENHA O PLACAR:
+            canvasCtx.font = "bold 72px Arial" //Fonte que todo PC tem (não preciso declarar alternativas)
+            canvasCtx.textAlign = 'center' //Texto centralizado
+            canvasCtx.textBaseline = 'top' //Definição de onde será a base do texto (no topo)
+            canvasCtx.fillStyle = "#01341D" //Estilo do texto: verde mais escuro que o do campo
+            canvasCtx.fillText("3", window.innerWidth / 4, 50) //Esse método exige alguns parâmetros: string, x e y; Definimos, arbritariamente, enquanto não tem lóg de prog (regras do jogo), que o texto será 3; O x será parametrizado no primeiro quatro do campo (1/4), ou seja, a largura do campo / 4; O y será a largura máxima (maxwidth).
+
+            canvasCtx.fillText(
+            "1", 
+            window.innerWidth / 4 + window.innerWidth / 2, 
+            50) //Aqui, a diferença é que precisamos posicionar o texto em outro espaço: 1/4 + 2/4 (calculo); Ou seja, pego o primeiro quarto, o segundo e o elemento de texto ficará no terceiro quarto. Dividir em quatro partes, pegar duas e colocá-lo no terceiro.
+
         }
 
         setup()
         draw() //Chamar essa função para desenhar os elementos na tela
     </script>
 </body>
-</html>
+</html> 
