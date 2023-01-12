@@ -19,9 +19,9 @@
     
     <script>
         const canvasEl = document.querySelector("canvas"), 
-            canvasCtx = canvasEl.getContext("2d")
-
-        const lineWidth = 15 //Para tratar a espessura da linha (no fillrect relacionado à linha central (rede) e raquetes).
+            canvasCtx = canvasEl.getContext("2d"),
+            gapX = 10,
+            lineWidth = 15 //Para tratar a espessura da linha (no fillrect relacionado à linha central (rede) e raquetes).
 
         const campo = {
             w: window.innerWidth,
@@ -45,6 +45,28 @@
             },
         }
 
+        const leftPaddle = {
+            x: gapX,
+            y: 200,
+            w: line.w,
+            h: 200,
+            draw: function() {
+                canvasCtx.fillStyle = "#ffffff"
+                canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+            }
+        }
+
+        const rightPaddle = { //Lembrando que temos diferença na propriedade x já que estamos construindo a raquete direita
+            x: campo.w - line.w - gapX,
+            y: 200,
+            w: line.w,
+            h: 200,
+            draw: function() {
+                canvasCtx.fillStyle = "#ffffff"
+                canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+            }
+        }
+
         function setup(){
             canvasEl.width = canvasCtx.width = campo.w
             canvasEl.height = canvasCtx.height = campo.h
@@ -53,7 +75,8 @@
         function draw(){
             campo.draw() //Com objeto, agora posso somente chamar o método de desenho. Tudo o que eu precisava me preocupar, já está contido nesse objeto campo, declarado lá em cima. 
             line.draw()
-
+            leftPaddle.draw()
+            rightPaddle.draw()
 
 
             // * DESENHA O CAMPO:
@@ -62,7 +85,7 @@
             //Usar propriedades de resetCSS para zerar margem e padding.
 
 
-            canvasCtx.fillStyle = "#ffffff" //a partir de agora, toda cor será branca
+            //canvasCtx.fillStyle = "#ffffff" //a partir de agora, toda cor será branca
 
             //const x = window.innerWidth / 2 - lineWidth / 2 //Queremos posicionar essa linha no meio. Portanto, pego a largura do campo e divido em dois; Se eu não descontar a linha, ela fica deslocada, vai ficar com o 0 (ponto de início) no canto superior direito (capricho necessário)
             //const y = 0 //O ponto de início é o ponto 0
@@ -72,14 +95,14 @@
             //canvasCtx.fillRect(x, y, L , A)
 
             // * DESENHA A RAQUETE ESQUERDA:
-            canvasCtx.fillRect(10, 200, lineWidth, 200)
+            //canvasCtx.fillRect(10, 200, lineWidth, 200)
 
             // * DESENHA A RAQUETE DIREITA:
-            canvasCtx.fillRect(window.innerWidth - lineWidth - 10,
-            300,
-            lineWidth,
-            200
-            )
+            //canvasCtx.fillRect(window.innerWidth - lineWidth - 10,
+            //300,
+            //lineWidth,
+            //200
+            //)
 
             // * DESENHA A BOLINHA:
             canvasCtx.beginPath()
