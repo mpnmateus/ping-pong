@@ -26,10 +26,23 @@
         const campo = {
             w: window.innerWidth,
             h: window.innerHeight,
-            draw: function(){
+            draw: function() { //O draw estará em todos os métodos
                 canvasCtx.fillStyle = "#286047"
-                canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
-            }
+                canvasCtx.fillRect(0, 0, this.w, this.h)
+            },
+        }
+
+        const line = {
+            w: lineWidth, //15
+            h: campo.h, //Podemos aproveitar a altura do objeto campo (herança)
+            draw: function(){
+                canvasCtx.fillStyle = "#ffffff" //O fillStyle branco deverá ser replicado para todos os elementos do jogo dentro dos métodos que compõem o objeto
+                canvasCtx.fillRect(
+                    campo.w / 2 - this.w / 2,
+                    0,
+                    this.w,
+                    this.h)
+            },
         }
 
         function setup(){
@@ -39,24 +52,24 @@
 
         function draw(){
             campo.draw() //Com objeto, agora posso somente chamar o método de desenho. Tudo o que eu precisava me preocupar, já está contido nesse objeto campo, declarado lá em cima. 
+            line.draw()
 
 
 
-            
             // * DESENHA O CAMPO:
             //canvasCtx.fillStyle = "#286047" //Define qual vai ser o estilo para desenhar o próximo objeto: um retângulo que vai possuir essa cor em hexadecimal. A fillStyle é uma propriedade em que se atribui valor (nao uma função)
-            //anvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight) //posição 0,0: começa do ponto noroeste inicial da janela. Quero, também, como largura e altura, toda a extensão: pegar toda a extensão da janela, a própria largura e a própria altura (inner...)
+            //canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight) //posição 0,0: começa do ponto noroeste inicial da janela. Quero, também, como largura e altura, toda a extensão: pegar toda a extensão da janela, a própria largura e a própria altura (inner...)
             //Usar propriedades de resetCSS para zerar margem e padding.
 
 
             canvasCtx.fillStyle = "#ffffff" //a partir de agora, toda cor será branca
 
-            const x = window.innerWidth / 2 - lineWidth / 2 //Queremos posicionar essa linha no meio. Portanto, pego a largura do campo e divido em dois; Se eu não descontar a linha, ela fica deslocada, vai ficar com o 0 (ponto de início) no canto superior direito (capricho necessário)
-            const y = 0 //O ponto de início é o ponto 0
-            const L = lineWidth //A largura é a própria espessura da linha
-            const A = window.innerHeight //A altura é a própria altura do campo
+            //const x = window.innerWidth / 2 - lineWidth / 2 //Queremos posicionar essa linha no meio. Portanto, pego a largura do campo e divido em dois; Se eu não descontar a linha, ela fica deslocada, vai ficar com o 0 (ponto de início) no canto superior direito (capricho necessário)
+            //const y = 0 //O ponto de início é o ponto 0
+            //const L = lineWidth //A largura é a própria espessura da linha
+            //const A = window.innerHeight //A altura é a própria altura do campo
             // * DESENHA A LINHA CENTRAL:
-            canvasCtx.fillRect(x, y, L , A)
+            //canvasCtx.fillRect(x, y, L , A)
 
             // * DESENHA A RAQUETE ESQUERDA:
             canvasCtx.fillRect(10, 200, lineWidth, 200)
