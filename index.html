@@ -90,12 +90,19 @@
             x: 280,
             y: 100, 
             r: 20, 
+            speed: 4,
+            _move: function() {
+                this.x += 1 * this.speed
+                this.y += 1 * this.speed
+            },
             draw: function() {
                 canvasCtx.fillStyle = "#ffffff"
                 canvasCtx.beginPath()
                 canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false) //As duas últimas propriedades são fixas, pois quero sempre uma bola
                 canvasCtx.fill() 
-            }
+
+                this._move()
+            },
         }
 
         function setup(){
@@ -117,8 +124,31 @@
 
         }
 
+        //setup()
+        //draw() //Chamar essa função para desenhar os elementos na tela
+
+        window.animateFrame = (function () {
+            return ( //chamar várias vezes em razão das versões/navegadores
+                window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback){
+                    return window.setTimeout(callback, 1000 / 60)
+                }
+            )
+
+        })()
+
+        function main() {
+            animateFrame(main)
+            draw()
+        }
+
         setup()
-        draw() //Chamar essa função para desenhar os elementos na tela
+        main()
+        //window.setInterval(draw, 1000 / 60)
     </script>
 </body>
 </html> 
