@@ -107,7 +107,7 @@
             directionY: 1, //diz o sentido em que a bolinha está andando. 1: bolinha anda para baixo; -1: bolinha anda para cima.
             
             _calcPosition: function() { //função de cálculo da posição
-                if (this.y > campo.h - this.r){ //vai verificar se a posição da bola está relativa à lateral (inferior e superior)
+                if (this.y > campo.h - this.r && this.directionY > 0){ //vai verificar se a posição da bola está relativa à lateral (inferior e superior)
                     this._reverseY()
                 } 
             },
