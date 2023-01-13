@@ -67,6 +67,20 @@
             }
         }
 
+
+
+        const ball = {
+            x: 280,
+            y: 100, 
+            r: 20, 
+            draw: function() {
+                canvasCtx.fillStyle = "#ffffff"
+                canvasCtx.beginPath()
+                canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false) //As duas últimas propriedades são fixas, pois quero sempre uma bola
+                canvasCtx.fill() 
+            }
+        }
+
         function setup(){
             canvasEl.width = canvasCtx.width = campo.w
             canvasEl.height = canvasCtx.height = campo.h
@@ -75,53 +89,13 @@
         function draw(){
             campo.draw() //Com objeto, agora posso somente chamar o método de desenho. Tudo o que eu precisava me preocupar, já está contido nesse objeto campo, declarado lá em cima. 
             line.draw()
+            
             leftPaddle.draw()
             rightPaddle.draw()
+            
 
-
-            // * DESENHA O CAMPO:
-            //canvasCtx.fillStyle = "#286047" //Define qual vai ser o estilo para desenhar o próximo objeto: um retângulo que vai possuir essa cor em hexadecimal. A fillStyle é uma propriedade em que se atribui valor (nao uma função)
-            //canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight) //posição 0,0: começa do ponto noroeste inicial da janela. Quero, também, como largura e altura, toda a extensão: pegar toda a extensão da janela, a própria largura e a própria altura (inner...)
-            //Usar propriedades de resetCSS para zerar margem e padding.
-
-
-            //canvasCtx.fillStyle = "#ffffff" //a partir de agora, toda cor será branca
-
-            //const x = window.innerWidth / 2 - lineWidth / 2 //Queremos posicionar essa linha no meio. Portanto, pego a largura do campo e divido em dois; Se eu não descontar a linha, ela fica deslocada, vai ficar com o 0 (ponto de início) no canto superior direito (capricho necessário)
-            //const y = 0 //O ponto de início é o ponto 0
-            //const L = lineWidth //A largura é a própria espessura da linha
-            //const A = window.innerHeight //A altura é a própria altura do campo
-            // * DESENHA A LINHA CENTRAL:
-            //canvasCtx.fillRect(x, y, L , A)
-
-            // * DESENHA A RAQUETE ESQUERDA:
-            //canvasCtx.fillRect(10, 200, lineWidth, 200)
-
-            // * DESENHA A RAQUETE DIREITA:
-            //canvasCtx.fillRect(window.innerWidth - lineWidth - 10,
-            //300,
-            //lineWidth,
-            //200
-            //)
-
-            // * DESENHA A BOLINHA:
-            canvasCtx.beginPath()
-            // Entre o beginPath e o fill, nesse intervalo, desenhamos o arco
-            canvasCtx.arc(200, 300, 20, 0, 2 * Math.PI, false)
-            canvasCtx.fill() //o comando arc não tem um fillArc, por ex. Por isso usamos esse comando. 
-
-
-            // * DESENHA O PLACAR:
-            canvasCtx.font = "bold 72px Arial" //Fonte que todo PC tem (não preciso declarar alternativas)
-            canvasCtx.textAlign = 'center' //Texto centralizado
-            canvasCtx.textBaseline = 'top' //Definição de onde será a base do texto (no topo)
-            canvasCtx.fillStyle = "#01341D" //Estilo do texto: verde mais escuro que o do campo
-            canvasCtx.fillText("3", window.innerWidth / 4, 50) //Esse método exige alguns parâmetros: string, x e y; Definimos, arbritariamente, enquanto não tem lóg de prog (regras do jogo), que o texto será 3; O x será parametrizado no primeiro quatro do campo (1/4), ou seja, a largura do campo / 4; O y será a largura máxima (maxwidth).
-
-            canvasCtx.fillText(
-            "1", 
-            window.innerWidth / 4 + window.innerWidth / 2, 
-            50) //Aqui, a diferença é que precisamos posicionar o texto em outro espaço: 1/4 + 2/4 (calculo); Ou seja, pego o primeiro quarto, o segundo e o elemento de texto ficará no terceiro quarto. Dividir em quatro partes, pegar duas e colocá-lo no terceiro.
+            ball.draw()
+            
 
         }
 
