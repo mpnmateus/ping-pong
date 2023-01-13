@@ -103,9 +103,28 @@
             y: 100, 
             r: 20, 
             speed: 4,
+            directionX: 1,
+            directionY: 1, //diz o sentido em que a bolinha está andando. 1: bolinha anda para baixo; -1: bolinha anda para cima.
+            
+            _calcPosition: function() { //função de cálculo da posição
+                if (this.y > campo.h - this.r){ //vai verificar se a posição da bola está relativa à lateral (inferior e superior)
+                    this._reverseY()
+                } 
+            },
+
+            _reverseX: function () {
+                this.directionY = this.directionX * -1 //inverte o sinal do valor que contém a propriedade directionX
+                //forma resumida: this.directionX *= -1
+            },
+
+            _reverseY: function () {
+                this.directionY = this.directionY * -1 //inverte o sinal do valor que contém a propriedade directionY
+                //forma resumida: this.directionY *= -1
+            },
+
             _move: function() {
-                this.x += 1 * this.speed
-                this.y += 1 * this.speed
+                this.x += this.directionX * this.speed
+                this.y += this.directionY * this.speed
             },
             draw: function() {
                 canvasCtx.fillStyle = "#ffffff"
@@ -113,6 +132,7 @@
                 canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false) //As duas últimas propriedades são fixas, pois quero sempre uma bola
                 canvasCtx.fill() 
 
+                this._calcPosition()
                 this._move()
             },
         }
