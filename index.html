@@ -99,25 +99,34 @@
 
 
         const ball = {
-            x: 280,
-            y: 100, 
+            x: 0,
+            y: 0, 
             r: 20, 
             speed: 4,
             directionX: 1,
             directionY: 1, //diz o sentido em que a bolinha está andando. 1: bolinha anda para baixo; -1: bolinha anda para cima.
             
-            _calcPosition: function() { //função de cálculo da posição
-                if (this.y > campo.h - this.r && this.directionY > 0){ //vai verificar se a posição da bola está relativa à lateral (inferior e superior)
+            _calcPosition: function() { //função de cálculo da posição; verifica as laterais superior e inferior do campo
+                if (
+                    (this.y - this.r < 0 && this.directionY < 0) ||
+                    (this.y > campo.h - this.r && this.directionY > 0)
+                    ){ //vai verificar se a posição da bola está relativa à lateral (inferior e superior)
+                    
+                    //rebate a bola invertendo o sinal do eixo Y
                     this._reverseY()
                 } 
             },
 
             _reverseX: function () {
+                //1 * -1 = -1
+                //-1 * -1 = 1
                 this.directionY = this.directionX * -1 //inverte o sinal do valor que contém a propriedade directionX
                 //forma resumida: this.directionX *= -1
             },
 
             _reverseY: function () {
+                //1 * -1 = -1
+                //-1 * -1 = 1
                 this.directionY = this.directionY * -1 //inverte o sinal do valor que contém a propriedade directionY
                 //forma resumida: this.directionY *= -1
             },
@@ -138,7 +147,7 @@
         }
 
         function setup(){
-            canvasEl.width = canvasCtx.width = campo.w
+            canvasEl.width = canvasCtx.width = campo.w //Simplificando e referenciando objeto à partir do pilar de herança
             canvasEl.height = canvasCtx.height = campo.h
         }
 
