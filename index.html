@@ -117,7 +117,7 @@
             
             _calcPosition: function() { //função de cálculo da posição; verifica as laterais superior e inferior do campo
                 //verifica se o jogador 1 fez ponto (x > largura do campo). Verificar se passa de Y
-                if (this.x > campo.w){
+                if (this.x > campo.w - this.r - rightPaddle.w - gapX){
                     //verifica se a raquete direita está na posição y da bola
                     if( //se isso for verdade, significa que a bola está rebatendo em algum desses pontos (dimensão de altura da raquete) 
                         this.y + this.r > rightPaddle.y &&
