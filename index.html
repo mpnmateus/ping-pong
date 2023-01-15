@@ -117,7 +117,7 @@
             
             _calcPosition: function() { //função de cálculo da posição; verifica as laterais superior e inferior do campo
                 //verifica se o jogador 1 fez ponto (x > largura do campo). Verificar se passa de Y
-                if (this.x > campo.h){
+                if (this.x > campo.w){
                     //verifica se a raquete direita está na posição y da bola
                     if( //se isso for verdade, significa que a bola está rebatendo em algum desses pontos (dimensão de altura da raquete) 
                         this.y + this.r > rightPaddle.y &&
@@ -128,6 +128,7 @@
                     } else {
                         //pontuar o jogador 1
                         score.increaseHuman()
+                        this._pointup()
                     }
                 }
                 if (
@@ -152,6 +153,11 @@
                 //-1 * -1 = 1
                 this.directionY = this.directionY * -1 //inverte o sinal do valor que contém a propriedade directionY
                 //forma resumida: this.directionY *= -1
+            },
+
+            _pointup: function(){//função para quando há marcação de ponto, colocando a bola no meio do campo
+                this.x = campo.w / 2
+                this.y = campo.h / 2
             },
 
             _move: function() {
