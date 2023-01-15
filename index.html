@@ -63,7 +63,7 @@
             },
         }
 
-        const rightPaddle = { //Lembrando que temos diferença na propriedade x já que estamos construindo a raquete direita
+        const rightPaddle = { //Lembrando que temos diferença na propriedade x, já que estamos construindo a raquete direita
             x: campo.w - line.w - gapX,
             y: 200,
             w: line.w,
@@ -82,6 +82,15 @@
         const score = {
             human: 1,
             computer: 2,
+
+            increaseHuman: function() {
+                this.human++
+            },
+
+            increaseComputer: function() {
+                this.computer++
+            },
+
             draw: function() {
                 canvasCtx.font = "bold 72px Arial"
                 canvasCtx.textAlign = 'center'
@@ -107,6 +116,20 @@
             directionY: 1, //diz o sentido em que a bolinha está andando. 1: bolinha anda para baixo; -1: bolinha anda para cima.
             
             _calcPosition: function() { //função de cálculo da posição; verifica as laterais superior e inferior do campo
+                //verifica se o jogador 1 fez ponto (x > largura do campo). Verificar se passa de Y
+                if (this.x > campo.h){
+                    //verifica se a raquete direita está na posição y da bola
+                    if( //se isso for verdade, significa que a bola está rebatendo em algum desses pontos (dimensão de altura da raquete) 
+                        this.y + this.r > rightPaddle.y &&
+                        this.y - this.r < rightPaddle.y + rightPaddle.h
+                    ) {
+                        //rebate a bola invertendo o sinal de X
+                        this._reverseX()
+                    } else {
+                        //pontuar o jogador 1
+                        score.increaseHuman()
+                    }
+                }
                 if (
                     (this.y - this.r < 0 && this.directionY < 0) ||
                     (this.y > campo.h - this.r && this.directionY > 0)
@@ -117,7 +140,7 @@
                 } 
             },
 
-            _reverseX: function () {
+            _reverseX: function () { //função usada para rebater (x = eixo horizontal)
                 //1 * -1 = -1
                 //-1 * -1 = 1
                 this.directionY = this.directionX * -1 //inverte o sinal do valor que contém a propriedade directionX
@@ -166,9 +189,13 @@
         }
 
         //setup()
-        //draw() //Chamar essa função para desenhar os elementos na tela
+        //draw() //Chamar essa função para desenhar os elementos na tela - Já está contida na function main
 
-        window.animateFrame = (function () {
+        //while(true){
+            //draw()
+        //}
+
+        window.animateFrame = (function () { //Para tratar da animação do objeto ball, tornando a animação mais suavizada frame à frame
             return ( //chamar várias vezes em razão das versões/navegadores
                 window.requestAnimationFrame ||
                 window.webkitRequestAnimationFrame ||
@@ -195,7 +222,7 @@
             mouse.x = e.pageX //O objeto mouse vai ter na sua propriedade X, os valores do pageX
             mouse.y = e.pageY
 
-            //console.log(mouse)
+            //console.log(mouse): para verificar a alteração do mouse.x e mouse.y em função do movimento do mouse cuja propriedade é pageX e pageY de e (que é o parâmetro da função)
         })
     </script>
 </body>
