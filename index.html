@@ -130,6 +130,7 @@
                         //pontuar o jogador 1
                         score.increaseHuman()
                         this._pointup()
+                        this._increasemove()
                     }
                 }
 
@@ -146,6 +147,7 @@
                         //pontuar o jogador 2
                         score.increaseComputer()
                         this._pointup()
+                        this._increasemove()
                     }
             }
 
@@ -185,6 +187,12 @@
                 this.x += this.directionX * this.speed
                 this.y += this.directionY * this.speed
             },
+            
+            _increasemove: function(){
+                this.x += this.directionX * this.speed++
+                this.y += this.directionY * this.speed++
+            },
+
             draw: function() {
                 canvasCtx.fillStyle = "#ffffff"
                 canvasCtx.beginPath()
