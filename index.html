@@ -115,6 +115,7 @@
             directionX: 1,
             directionY: 1, //diz o sentido em que a bolinha está andando. 1: bolinha anda para baixo; -1: bolinha anda para cima.
             
+
             _calcPosition: function() { //função de cálculo da posição; verifica as laterais superior e inferior do campo
                 //verifica se o jogador 1 fez ponto (x > largura do campo). Verificar se passa de Y
                 if (this.x > campo.w - this.r - rightPaddle.w - gapX){
@@ -131,6 +132,24 @@
                         this._pointup()
                     }
                 }
+
+                //verifica se o jogador 2 fez ponto (x < 0 (largura do campo)).
+                if (this.x < this.r + leftPaddle.w + gapX){
+                    //verifica se a raquete esquerda está na posição y da bola
+                    if(
+                        this.y + this.r > leftPaddle.y &&
+                        this.y - this.r < leftPaddle.y + leftPaddle.h 
+                    ) {
+                        //rebate a bola invertendo o sinal de X
+                        this._reverseX()
+                    } else {
+                        //pontuar o jogador 2
+                        score.increaseComputer()
+                        this._pointup()
+                    }
+            }
+
+
                 if (
                     (this.y - this.r < 0 && this.directionY < 0) ||
                     (this.y > campo.h - this.r && this.directionY > 0)
@@ -138,8 +157,10 @@
                     
                     //rebate a bola invertendo o sinal do eixo Y
                     this._reverseY()
-                } 
+                }
             },
+
+            
 
             _reverseX: function () { //função usada para rebater (x = eixo horizontal)
                 //1 * -1 = -1
@@ -228,7 +249,7 @@
             mouse.x = e.pageX //O objeto mouse vai ter na sua propriedade X, os valores do pageX
             mouse.y = e.pageY
 
-            //console.log(mouse): para verificar a alteração do mouse.x e mouse.y em função do movimento do mouse cuja propriedade é pageX e pageY de e (que é o parâmetro da função)
+            //console.log(mouse) //para verificar a alteração do mouse.x e mouse.y em função do movimento do mouse cuja propriedade é pageX e pageY de e (que é o parâmetro da função)
         })
     </script>
 </body>
