@@ -68,9 +68,20 @@
             y: 200,
             w: line.w,
             h: 200,
-            _move: function() {
-                this.y = ball.y
+            speed: 5,
+            _move: function() { 
+                if (this.y + this.h / 2 < ball.y + ball.r){ //se o meio da raquete for menor que a dimensão da bola (posição y da bola mais o raio)
+                    //À medida medida que a bolinha vai se movimentando rapidamente, trabalho também com a velocidade da raquete
+                    this.y += this.speed //incremento a posição y da raquete fazendo ela descer (trabalhando juntamente com a speed dela)
+                } else {
+                    this.y -= this.speed //decremento a posição y da raquete fazendo ela subir (trabalhando juntamente com a speed dela)
+                }
             },
+
+            _speedUp: function (){
+                this.speed += 2 //o incremento da velovidade da bola é diferente do incremento da velocidade da raquete (sugerido, para criar motivação no jogo)
+            },
+
             draw: function() {
                 canvasCtx.fillStyle = "#ffffff"
                 canvasCtx.fillRect(this.x, this.y, this.w, this.h)
@@ -130,7 +141,6 @@
                         //pontuar o jogador 1
                         score.increaseHuman()
                         this._pointup()
-                        this._increasemove()
                     }
                 }
 
@@ -147,7 +157,6 @@
                         //pontuar o jogador 2
                         score.increaseComputer()
                         this._pointup()
-                        this._increasemove()
                     }
             }
 
@@ -179,6 +188,9 @@
             },
 
             _pointup: function(){//função para quando há marcação de ponto, colocando a bola no meio do campo
+                this._speedUp()
+                rightPaddle._speedUp()
+
                 this.x = campo.w / 2
                 this.y = campo.h / 2
             },
@@ -188,9 +200,8 @@
                 this.y += this.directionY * this.speed
             },
             
-            _increasemove: function(){
-                this.x += this.directionX * this.speed++
-                this.y += this.directionY * this.speed++
+            _speedUp: function(){
+                this.speed += 1
             },
 
             draw: function() {
