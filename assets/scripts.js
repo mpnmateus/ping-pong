@@ -70,8 +70,8 @@ const canvasEl = document.querySelector("canvas"),
         }
 
         const score = {
-            human: 1,
-            computer: 2,
+            human: 0,
+            computer: 0,
 
             increaseHuman: function() {
                 this.human++
