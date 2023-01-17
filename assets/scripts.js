@@ -59,7 +59,7 @@ const canvasEl = document.querySelector("canvas"),
             },
 
             _speedUp: function (){
-                this.speed += 2 //o incremento da velovidade da bola é diferente do incremento da velocidade da raquete (sugerido, para criar motivação no jogo)
+                this.speed += 1 //o incremento da velocidade da bola é diferente do incremento da velocidade da raquete (sugerido, para criar motivação no jogo)
             },
 
             draw: function() {
